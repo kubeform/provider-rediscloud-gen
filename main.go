@@ -39,13 +39,14 @@ func main() {
 	}
 
 	opts := &util.GeneratorOptions{
-		ProviderName:         "rediscloud",
-		ProviderNameOriginal: "provider",
-		ProviderData:         provider.New(os.Getenv("PROVIDER_VERSION"))(),
-		ProviderImportPath:   "github.com/RedisLabs/terraform-provider-rediscloud/rediscloud/provider",
-		Version:              "v1alpha1",
-		APIsPath:             apisPath,
-		ControllerPath:       controllerPath,
+		ProviderName:             "rediscloud",
+		ProviderNameOriginal:     "provider",
+		ProviderData:             provider.New(os.Getenv("PROVIDER_VERSION"))(),
+		ProviderGetterMethodBody: `provider.New("")()`,
+		ProviderImportPath:       "github.com/RedisLabs/terraform-provider-rediscloud/rediscloud/provider",
+		Version:                  "v1alpha1",
+		APIsPath:                 apisPath,
+		ControllerPath:           controllerPath,
 	}
 	err := util.Generate(opts)
 	if err != nil {
