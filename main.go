@@ -44,6 +44,7 @@ func main() {
 		ProviderData:             provider.New(os.Getenv("PROVIDER_VERSION"))(),
 		ProviderGetterMethodBody: `provider.New("")()`,
 		ProviderImportPath:       "github.com/RedisLabs/terraform-provider-rediscloud/rediscloud/provider",
+		ProviderConfig:           "RedisLabs/rediscloud",
 		Version:                  "v1alpha1",
 		APIsPath:                 apisPath,
 		ControllerPath:           controllerPath,
