@@ -39,10 +39,9 @@ repo_uptodate() {
 gen_version=$(git rev-parse --short HEAD)
 
 provider_name=rediscloud
-provider_repo="github.com/RedisLabs/terraform-provider-rediscloud"
-provider_version=$(go mod edit -json | jq -r ".Replace[] | select(.Old.Path == \"${provider_repo}\") | .New.Version")
+provider_repo="github.com/RedisLabs/terraform-provider-$provider_name"
+provider_version=$(go mod edit -json | jq -r ".Require[] | select(.Path == \"${provider_repo}\") | .Version")
 echo "$provider_version"
-export PROVIDER_VERSION="$provider_version"
 
 api_repo="github.com/kubeform/provider-${provider_name}-api"
 controller_repo="github.com/kubeform/provider-${provider_name}-controller"
@@ -108,7 +107,21 @@ git checkout -b "gen-${provider_version}-${gen_version}"
 rm -rf controllers
 mkdir controllers
 make gen-controllers
+
 go mod edit \
+    -dropreplace=google.golang.org/api \
+    -require=kubeform.dev/terraform-backend-sdk@v0.0.0-20210922115523-21574335f0db \
+    -dropreplace=github.com/Azure/go-ansiterm \
+    -dropreplace=github.com/Azure/go-autorest/tracing \
+    -dropreplace=github.com/Azure/go-autorest/logger \
+    -dropreplace=github.com/Azure/go-autorest/autorest/validation \
+    -dropreplace=github.com/Azure/go-autorest/autorest/to \
+    -dropreplace=github.com/Azure/go-autorest/autorest/mocks \
+    -dropreplace=github.com/Azure/go-autorest/autorest/date \
+    -dropreplace=github.com/Azure/go-autorest/autorest/adal \
+    -dropreplace=github.com/Azure/go-autorest/autorest \
+    -dropreplace=github.com/Azure/go-autorest \
+    -dropreplace=github.com/Azure/azure-sdk-for-go \
     -require="${provider_repo}@${provider_version}" \
     -require="kubeform.dev/provider-${provider_name}-api@${api_version}" \
     -require=gomodules.xyz/logs@v0.0.3 \
