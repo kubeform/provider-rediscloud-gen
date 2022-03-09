@@ -23,7 +23,7 @@ import (
 
 	"kubeform.dev/generator-v2/util"
 
-	"github.com/RedisLabs/terraform-provider-rediscloud/rediscloud/provider"
+	"github.com/RedisLabs/terraform-provider-rediscloud/rediscloud"
 )
 
 func main() {
@@ -40,10 +40,10 @@ func main() {
 
 	opts := &util.GeneratorOptions{
 		ProviderName:             "rediscloud",
-		ProviderNameOriginal:     "provider",
-		ProviderData:             provider.New(os.Getenv("PROVIDER_VERSION"))(),
-		ProviderGetterMethodBody: `provider.New("")()`,
-		ProviderImportPath:       "github.com/RedisLabs/terraform-provider-rediscloud/rediscloud/provider",
+		ProviderNameOriginal:     "rediscloud",
+		ProviderData:             rediscloud.New(os.Getenv("PROVIDER_VERSION"))(),
+		ProviderGetterMethodBody: `rediscloud.New("")()`,
+		ProviderImportPath:       "github.com/RedisLabs/terraform-provider-rediscloud/rediscloud",
 		ProviderConfig:           "RedisLabs/rediscloud",
 		Version:                  "v1alpha1",
 		APIsPath:                 apisPath,
