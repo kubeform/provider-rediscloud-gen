@@ -8,4 +8,4 @@ require (
 	kubeform.dev/generator-v2 v0.0.28
 )
 
-replace github.com/RedisLabs/terraform-provider-rediscloud => github.com/kubeform/terraform-provider-rediscloud c24fba3610ac76a5f310f8afdece44c26e7d49a1
+replace github.com/RedisLabs/terraform-provider-rediscloud => github.com/kubeform/terraform-provider-rediscloud v0.2.5-0.20220307131411-c24fba3610ac
