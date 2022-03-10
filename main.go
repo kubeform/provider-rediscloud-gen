@@ -45,6 +45,7 @@ func main() {
 		ProviderGetterMethodBody: `rediscloud.New("")()`,
 		ProviderImportPath:       "github.com/RedisLabs/terraform-provider-rediscloud/rediscloud",
 		ProviderConfig:           "RedisLabs/rediscloud",
+		TfPluginVersion:          "v2.8.0",
 		Version:                  "v1alpha1",
 		APIsPath:                 apisPath,
 		ControllerPath:           controllerPath,
